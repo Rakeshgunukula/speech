@@ -27,6 +27,12 @@
             if(command.includes('hello')){
                 speak('Hi,Welcome to my website');
             }
+            else if(command.includes('youtube')){
+                window.open('https://youtube.com');
+            }
+            else if(command.includes('google')){
+                window.open('https://google.com');
+            }
         }
         function speak(text){
             const speech = new SpeechSynthesisUtterance(text);
