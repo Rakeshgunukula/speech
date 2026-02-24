@@ -38,13 +38,7 @@
             else if(command.includes('youtube')){
                 speak('opening youtube..');
                 const redirect = document.querySelector('#redirect');
-                setTimeout(()=>{
-                 redirect.dispatchEvent(new MouseEvent("click",{
-                    bubbles:true,
-                    cancelable:true,
-                    view:window
-                 }))
-                },1000)
+               redirect.click();
             }
             else if(command.includes('google')){
                 window.open('https://google.com');
