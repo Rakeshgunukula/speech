@@ -11,16 +11,36 @@
     </style>
 </head>
 <body>
-    <button id="btn" onclick="speak()">clickme</button>
+    <button id="btn">clickme</button>
     <script>
-        const btn = document.querySelector('#btn');
-        function speak(){
-            const speech = new SpeechSynthesisUtterance('Hi, Welcome to my website');
+
+        // adding recognition
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.continuous = true;
+        recognition.interimResults = false;
+
+        recognition.onresult = (event) =>{
+            let command = event.results[event.results.length - 1][0].transcript.toLowercase();
+            if(command.includes('hello')){
+                speak('Hi,Welcome to my website');
+            }
+        }
+        function speak(text){
+            const speech = new SpeechSynthesisUtterance(text);
             speech.rate = 1;
             speech.pitch = 1;
             speech.volume = 1;
             window.speechSynthesis.speak(speech);
         }
+
+        const btn = document.querySelector('#btn');
+        btn.addEventListener('click', ()=>{
+            recognition.start();
+        })
+        
     </script>
 </body>
 </html>
